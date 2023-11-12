@@ -10,5 +10,5 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 interface RecommendationAlgorithmInterface
 {
     public function supports(string $recommendationType): bool;
-    public function getRecommendations(int $numberOfRecommendations, array $titlesToRecommend): array;
+    public function getRecommendations(int $numberOfRecommendations, array $availableEntries): array;
 }
