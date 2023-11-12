@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Provider;
+namespace App\Tests\Provider;
 
 use App\Provider\MovieTitleProvider;
 use App\Provider\RecommendationProvider;
+use App\Tests\Util\RecommendationAlgorithmMock;
 use Monolog\Test\TestCase;
 use RuntimeException;
 
@@ -25,5 +26,13 @@ final class RecommendationProviderTest extends TestCase
 
         $this->recommendationProvider = new RecommendationProvider([], $this->titleProvider);
         $this->recommendationProvider->provide('non-existing-algorithm');
+    }
+
+    public function testAlgorithm(): void
+    {
+        $this->recommendationProvider = new RecommendationProvider([new RecommendationAlgorithmMock()], $this->titleProvider);
+        $result = $this->recommendationProvider->provide(RecommendationAlgorithmMock::SUPPORTED_TYPE);
+
+        self::assertEqualsCanonicalizing(RecommendationAlgorithmMock::RETURNED_ARRAY, $result);
     }
 }
