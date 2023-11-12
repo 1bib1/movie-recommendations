@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Util\Const;
 
-final class RecommendationTypes: string
+final class RecommendationTypes
 {
     public const RANDOM = 'RANDOM';
     public const TITLE_STARTS_WITH_W = 'TITLE_STARTS_WITH_W';
