@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Enum;
+namespace App\Util\Const;
 
 final class RecommendationTypes: string
 {
