@@ -8,14 +8,13 @@ use App\Provider\Interface\RecommendationProviderInterface;
 use App\RecommendationAlgorithm\Interface\RecommendationAlgorithmInterface;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
-use Traversable;
 
 use function sprintf;
 
 class RecommendationProvider implements RecommendationProviderInterface
 {
     public function __construct(
-        #[TaggedIterator('recommendation.algorithm')] protected readonly Traversable $recommendationAlgorithms,
+        #[TaggedIterator('recommendation.algorithm')] protected readonly iterable $recommendationAlgorithms,
         protected readonly MovieTitleProvider $movieTitleProvider,
     ) {
     }
