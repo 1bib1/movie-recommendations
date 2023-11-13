@@ -62,7 +62,7 @@ final class RandomRecommendationAlgorithmTest extends TestCase
     {
         return [
             'number_of_recommendations_is_same_length_as_array' => [[], ['a', 'b', 'c'], ['a', 'b', 'c']],
-            'different_number_of_recommendations' => [[0,1,4], ['a', 'b', 'c', 'd' , 'e'], ['a', 'b', 'e']],
+            'different_number_of_recommendations' => [[0, 1, 4], ['a', 'b', 'c', 'd' , 'e'], ['a', 'b', 'e']],
             '3_movies' => [[0, 7, 13], Movies::MOVIES, ['Pulp Fiction', 'Leon zawodowiec', 'Chłopaki nie płaczą']],
         ];
     }

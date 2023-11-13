@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Algorithm;
 
 use App\RecommendationAlgorithm\MultipleWordsInTitleRecommendation;
+use App\Util\Const\Movies;
 use App\Util\Const\RecommendationTypes;
 use App\Util\Generator\NonRepetitiveRandomNumberGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -29,9 +30,8 @@ final class MultipleWordsInTitleRecommendationTest extends TestCase
     /**
      * @dataProvider getRecommendationsDataProvider
      */
-    public function testGetRecommendations(array $numbersToReturn, array $allMovies, array $expectedMovies): void
+    public function testGetRecommendations(int $numberOfMoviesToRecommend, array $numbersToReturn, array $allMovies, array $expectedMovies): void
     {
-        $numberOfMoviesToRecommend = 3;
         $this->randomNumberGenerator->method('generate')->willReturn($numbersToReturn);
 
         $recommendedMovies = $this->algorithm->getRecommendations($numberOfMoviesToRecommend, $allMovies);
@@ -43,19 +43,66 @@ final class MultipleWordsInTitleRecommendationTest extends TestCase
     {
         return [
             'number_of_recommendations_is_same_length_as_array' => [
+                3,
                 [],
                 ['One', 'Single Siren', 'Word', 'Great Shrek', 'Something', 'Great Inception',],
                 ['Single Siren', 'Great Shrek', 'Great Inception'],
             ],
             'different_number_of_recommendations' => [
-                [0,1,4],
+                3,
+                [0, 1, 4],
                 ['First Great Movie', 'Second Great Movie', 'Third Great Movie', 'Fourth Great Movie', 'Fifth Great Movie'],
                 ['First Great Movie', 'Second Great Movie', 'Fifth Great Movie']],
+            '3_movies' => [
+                3,
+                [0, 3, 7],
+                Movies::MOVIES,
+                [
+                    'Doktor Strange',
+                    'Ojciec chrzestny',
+                    'Pulp Fiction',
+                ],
+            ],
+            'all_movies' => [
+                28,
+                [],
+                Movies::MOVIES,
+                self::getAllMoviesWithTwoWords(),
+            ]
         ];
     }
 
-    public function testWithMovieTitles(): void
+    public static function getAllMoviesWithTwoWords(): array
     {
-
+        return [
+            'American Beauty',
+            'Blade Runner',
+            'Breaking Bad',
+            'Casino Royale',
+            'Doktor Strange',
+            'Dwunastu gniewnych ludzi',
+            'Fight Club',
+            'Forest Gump',
+            'Forrest Gump',
+            'Gran Torino',
+            'Green Mile',
+            'La La Land',
+            'Leon zawodowiec',
+            'Milczenie owiec',
+            'Mroczny Rycerz',
+            'Nagi instynkt',
+            'Ojciec chrzestny',
+            'Pulp Fiction',
+            'Requiem dla snu',
+            'Siedem dusz',
+            'Sin City',
+            'Skazani na Shawshank',
+            'Skazany na bluesa',
+            'Szeregowiec Ryan',
+            'Truman Show',
+            'Wielki Gatsby',
+            'Wyspa tajemnic',
+            'Zielona mila',
+        ];
     }
 }
