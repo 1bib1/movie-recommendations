@@ -54,5 +54,8 @@ final class MultipleWordsInTitleRecommendationTest extends TestCase
         ];
     }
 
-    // TODO: add tests with Movies const
+    public function testWithMovieTitles(): void
+    {
+
+    }
 }

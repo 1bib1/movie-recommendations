@@ -23,7 +23,8 @@ class RandomRecommendation implements RecommendationAlgorithmInterface
 
     public function getRecommendations(int $numberOfRecommendations, array $availableEntries): array
     {
-        $availableEntries = array_unique($availableEntries);
+        // get unique entries and reset keys
+        $availableEntries = array_values(array_unique($availableEntries));
         $movieCount = count($availableEntries);
 
         if ($numberOfRecommendations > $movieCount) {
@@ -43,6 +44,7 @@ class RandomRecommendation implements RecommendationAlgorithmInterface
         $randomNumbers = $this->randomNumberGenerator->generate(0, count($movies) - 1, $numberOfRecommendations);
 
         $data = [];
+
 
         foreach ($randomNumbers as $randomNumber) {
             $data[] = $movies[$randomNumber];
